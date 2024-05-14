@@ -14,6 +14,7 @@ const char msBoxOk = 'X';
 const char msOk = '*';
 const char msEmpty = ' ';
 
+//definitions of characters on map
 const int CellSizeX = 3;
 const int CellSizeY = 2;
 const char masCursor[CellSizeY][CellSizeX + 1] = {
@@ -45,6 +46,7 @@ const char masEmpty[CellSizeY][CellSizeX + 1] = {
 "   "
 };
 
+//maps
 const char DefaultMap1[ArrSizeY][ArrSizeX] = {
 	"#####",
 	"#@  #",
@@ -147,6 +149,7 @@ const char DefaultMap7[ArrSizeY][ArrSizeX] = {
 	"         #####         "
 };
 const int DefaultStepCount7 = 10000;
+//you can add more maps here, don't forget to cahnge the number of maps in program and levels in user interface
 
 typedef struct {
 	int x;
@@ -166,6 +169,7 @@ int MapSizeY;
 const int WinSizeX = 25;
 const int WinSizeY = 8;
 
+//"destroy" map and get all boxes
 bool FindBox(int x, int y, int& BoxIndex) {
 	BoxIndex = -1;
 	for (int i = 0; i < BoxCount; i++) {
@@ -177,11 +181,13 @@ bool FindBox(int x, int y, int& BoxIndex) {
 	return false;
 }
 
+//check if the box excist there
 bool ExistBox(int x, int y) {
 	int BoxIndex = -1;
 	return FindBox(x, y, BoxIndex);
 }
 
+//some funny names for game parts
 void FirstGame() {
 	cout << setw(11) << "#" << setw(10) << "#" << setw(15) << "#" << endl;
 	cout << setw(3) << "##" << setw(11) << "#  #" << setw(7) << "#" << setw(15) << "#    #" << endl;
@@ -286,6 +292,7 @@ bool SetupParam(const char DefaultMap[ArrSizeY][ArrSizeX], int DefaultStepCount)
 	return true;
 }
 
+//choose the level (map number)
 bool Setup(int NumMap) {
 	switch (NumMap)
 	{
@@ -321,6 +328,7 @@ bool Setup(int NumMap) {
 	return false;
 }
 
+//check if you can make step
 bool CheckOk() {
 	for (int i = 0; i < BoxCount; i++) {
 		if (Boxes[i].x < 0)
@@ -331,12 +339,12 @@ bool CheckOk() {
 		char R = Mapka[Boxes[i].y][Boxes[i].x];
 		if (R == msOk)
 			continue;
-
 		return false;
 	}
 	return true;
 }
 
+//make step
 bool step(int dx, int dy, bool& ok, bool& notok)
 {
 	ok = false;
@@ -397,6 +405,7 @@ void DrawCellPart(const char masCell[CellSizeY][CellSizeX + 1], int Row) {
 	}
 }
 
+//draw everything
 void Draw(int vtHello, int vtMenu) {
 	int x;
 
@@ -535,7 +544,7 @@ void Draw(int vtHello, int vtMenu) {
 		menu();
 }
 
-
+//get from user what to do
 bool Input(int& vt) {
 	bool res = true;
 	bool ok;
