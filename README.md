@@ -7,4 +7,5 @@ During the visualization every symbol have there own 6 symbols analog to be pres
 
 
 It was my first project for university programming classes, I hope you will like it :D
+
 Created in November 2022.
